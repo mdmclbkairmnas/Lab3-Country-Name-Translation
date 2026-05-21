@@ -35,9 +35,9 @@ public class CountryCodeConverter {
         try {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
-
+            lines.remove(0);
             for (String line : lines) {
-                String[] currRowArray = line.split("[' ']");
+                String[] currRowArray = line.split("\t");
                 codeToName.put(currRowArray[2], currRowArray[0]);
                 nameToCode.put(currRowArray[0], currRowArray[2]);
                 length++;
@@ -56,7 +56,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        return codeToName.get(code);
+        return codeToName.get(code.toUpperCase());
     }
 
     /**
