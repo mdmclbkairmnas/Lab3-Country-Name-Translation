@@ -13,7 +13,9 @@ import java.util.Map;
  */
 public class CountryCodeConverter {
 
-    // TODO Task: pick appropriate instance variable(s) to store the data necessary for this class
+    private Map<String, String> codeToName = new HashMap<>();
+    private Map<String, String> nameToCode = new HashMap<>();
+    private int length;
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -34,7 +36,12 @@ public class CountryCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            // TODO Task: use lines to populate the instance variable(s)
+            for (String line : lines) {
+                String[] currRowArray = line.split("[' ']");
+                codeToName.put(currRowArray[2], currRowArray[0]);
+                nameToCode.put(currRowArray[0], currRowArray[2]);
+                length++;
+            }
 
         }
         catch (IOException | URISyntaxException ex) {
@@ -49,8 +56,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return code;
+        return codeToName.get(code);
     }
 
     /**
@@ -60,7 +66,7 @@ public class CountryCodeConverter {
      */
     public String fromCountry(String country) {
         // TODO Task: update this code to use an instance variable to return the correct value
-        return country;
+        return nameToCode.get(country);
     }
 
     /**
@@ -68,7 +74,6 @@ public class CountryCodeConverter {
      * @return how many countries are included in this code converter.
      */
     public int getNumCountries() {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return 0;
+        return length;
     }
 }
