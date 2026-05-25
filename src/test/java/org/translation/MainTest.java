@@ -79,9 +79,11 @@ public class MainTest {
                 "select a language from above:\n" +
                 "Canada in English is Canada\n" +
                 "Press enter to continue or quit to exit.";
+        // use System.lineSeparator() to be more general
+        expected = expected.replace("\n", System.lineSeparator());
         assertTrue("For input:\n\n'Canada\nEnglish\nquit\n'\nthe program output was expected to contain:\n\n" +
-                expected + "\n\n" +
-                "actual output:\n\n" + result,
+                        expected + "\n\n" +
+                        "actual output:\n\n" + result,
                 result.contains(expected));
     }
 
@@ -135,6 +137,7 @@ public class MainTest {
                 "United Kingdom of Great Britain and Northern Ireland (the)\n" +
                 "United States of America (the)\nUruguay\nUzbekistan\nVanuatu\n" +
                 "Venezuela (Bolivarian Republic of)\nViet Nam\nYemen\nZambia\nZimbabwe";
+        expected = expected.replace("\n", System.lineSeparator());
         assertTrue("Countries are not displayed in sorted order\n\n"
                 + "expected:\n\n" + expected + "\n\nactual:\n\n" + result + "\n(only the country names are compared in this test)", result.contains(expected));
     }

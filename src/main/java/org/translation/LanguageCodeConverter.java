@@ -14,8 +14,8 @@ import java.util.Map;
  */
 public class LanguageCodeConverter {
 
-    HashMap<String, String> languagestocodes =  new HashMap<>();
-    HashMap<String, String> codestolanguages =  new HashMap<>();
+    private Map<String, String> languagesToCodes = new HashMap<>();
+    private Map<String, String> codesToLanguages = new HashMap<>();
 
     /**
      * Default constructor which will load the language codes from "language-codes.txt"
@@ -36,15 +36,13 @@ public class LanguageCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            // TODO Task: use lines to populate the instance variable
-            //           tip: you might find it convenient to create an iterator using lines.iterator()
-            Iterator itr =  lines.iterator();
+            Iterator itr = lines.iterator();
             itr.next();
             while (itr.hasNext()) {
                 String line = itr.next().toString();
                 String[] parts = line.split("\t");
-                languagestocodes.put(parts[0], parts[1]);
-                codestolanguages.put(parts[1], parts[0]);
+                languagesToCodes.put(parts[0], parts[1]);
+                codesToLanguages.put(parts[1], parts[0]);
             }
 
         }
@@ -60,7 +58,7 @@ public class LanguageCodeConverter {
      * @return the name of the language corresponding to the code
      */
     public String fromLanguageCode(String code) {
-        return codestolanguages.get(code);
+        return codesToLanguages.get(code);
     }
 
     /**
@@ -69,7 +67,7 @@ public class LanguageCodeConverter {
      * @return the 2-letter code of the language
      */
     public String fromLanguage(String language) {
-        return languagestocodes.get(language);
+        return languagesToCodes.get(language);
     }
 
     /**
@@ -77,6 +75,6 @@ public class LanguageCodeConverter {
      * @return how many languages are included in this code converter.
      */
     public int getNumLanguages() {
-        return codestolanguages.size();
+        return codesToLanguages.size();
     }
 }

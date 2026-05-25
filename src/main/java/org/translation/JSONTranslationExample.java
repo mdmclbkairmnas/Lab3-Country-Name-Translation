@@ -51,8 +51,12 @@ public class JSONTranslationExample {
         while (!jsonArray.getJSONObject(i).getString("alpha3").equals(countryCode) && i < jsonArray.length() - 1) {
             i++;
         }
-        nation = jsonArray.getJSONObject(i);
-        return nation.getString(languageCode);
+        if (jsonArray.getJSONObject(i).getString("alpha3").equals(countryCode)) {
+            nation = jsonArray.getJSONObject(i);
+            return nation.getString(languageCode);
+        }
+        return "Country not found";
+
     }
 
     /**
